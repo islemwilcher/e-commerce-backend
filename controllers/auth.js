@@ -2,9 +2,9 @@
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
-import User from '../moduls/user'
+import User from '../moduls/user.js'
 
-const secret = test
+const secret = 'test'
 
 // regester
 
