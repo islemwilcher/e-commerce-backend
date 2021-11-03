@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
-import userAuthRouter from './routes/user.js'
+import userAuthRouter from './routes/auth.js'
 
 const app = express()
 dotenv.config()

@@ -4,15 +4,29 @@ import jwt from "jsonwebtoken"
 
 import User from '../moduls/user.js'
 
-const secret = 'test'
 
 //log in
 export const signin = async ( req, res ) => {
+    const { userName, password } = req.body
 
+    try {
+        const oldUser = await User.findOne({ userName })
+
+        if(!oldUser) return res.status(404).json({ message: "User doesn't exist" })
+
+        const isPasswordCorrect = await bcrypt.compare(password, oldUser.password)
+
+        if(!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials' })
+
+        const token = jwt.sign({ userName: oldUser.userName, id: oldUser._id }, process.env.secret, { expiresIn: '1d' })
+
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
 }
 
 
-//sign in
+//sign up
 export const signup = async ( req, res ) => {
     const { email, password, userName } = req.body
 
@@ -25,7 +39,7 @@ export const signup = async ( req, res ) => {
 
         const result = await User.create({ email, password: hashedPassword, userName })
 
-        const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: '2h' })
+        const token = jwt.sign( { email: result.email, id: result._id }, process.env.secret, { expiresIn: '1d' })
 
         res.status(200).json({ result, token })
     } catch (error) {
