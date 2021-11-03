@@ -6,11 +6,14 @@ import User from '../moduls/user.js'
 
 const secret = 'test'
 
-// regester
+//log in
+export const signin = async ( req, res ) => {
+
+}
 
 
 //sign in
-export const signin = async ( req, res ) => {
+export const signup = async ( req, res ) => {
     const { email, password, userName } = req.body
 
     try {
