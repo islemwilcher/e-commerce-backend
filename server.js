@@ -5,7 +5,8 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
-import userAuthRouter from './routes/auth.js'
+import AuthRouter from './routes/auth.js'
+import UserRouter from './routes/user.js'
 
 const app = express()
 dotenv.config()
@@ -15,7 +16,8 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 
 app.use(cors())
 
-app.use('/auth', userAuthRouter)
+app.use('/auth', AuthRouter)
+app.use('/users', UserRouter)
 
 const PORT = process.env.PORT || 5000
 
