@@ -20,6 +20,7 @@ export const signin = async ( req, res ) => {
 
         const token = jwt.sign({ userName: oldUser.userName, id: oldUser._id }, process.env.secret, { expiresIn: '1d' })
 
+        res.status(200).json('user sin in seccessfuly')
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
     }

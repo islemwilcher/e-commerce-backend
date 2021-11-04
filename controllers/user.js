@@ -16,9 +16,8 @@ export const getUser = async (req, res) => {
     try {
         const user = await User.findById(id)
         res.status(200).json(user)
-        const
     } catch (error) {
-        res.status(404).json({ message: 'user not found!'});
+        res.status(404).json({ message: error.message });
     }
 }
 
