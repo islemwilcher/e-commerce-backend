@@ -13,10 +13,19 @@ export const getAllUsers = async (req, res) => {
 }
 
 //update
-export const updated = async (req, res) => {}
+export const updated = async (req, res) => {
+
+}
 
 //delete
-export const deleted = async (req, res) => {}
+export const deleted = async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(200).json('user has been deleted')
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 
 //get single user
 export const getUser = async (req, res) => {
