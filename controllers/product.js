@@ -1,7 +1,4 @@
 
-import CryptoJs from "crypto-js"
-import jwt from "jsonwebtoken"
-
 import Product from '../moduls/product.js'
 
 // create product
@@ -18,7 +15,24 @@ export const createProduct = async (req, res) => {
 
 // all products
 export const getAllProducts = async (req, res) => {
+    const queryNew = req.query.new
+    const queryCategory = req.query.category
     try {
+        let products
+
+        if(queryNew) {
+            products = await Product.find().sort({ createdat: -1 }).limit(1)
+        } else if(queryCategory) {
+            products = await Product.find({
+                categories: {
+                    $in: [queryCategory]
+                }
+            })
+        } else {
+            products = await Product.find()
+        }
+
+        res.status(200).json(products)
     } catch (error) {
         res.status(500).json(error)
     }
