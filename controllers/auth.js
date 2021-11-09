@@ -7,10 +7,10 @@ import User from '../moduls/user.js'
 
 //log in
 export const signin = async ( req, res ) => {
-    const { userName, password } = req.body
+    const { email, password } = req.body
 
     try {
-        const oldUser = await User.findOne({ userName })
+        const oldUser = await User.findOne({ email })
 
         if(!oldUser) return res.status(404).json({ message: "User doesn't exist" })
 
@@ -18,7 +18,7 @@ export const signin = async ( req, res ) => {
 
         if(!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials' })
 
-        const token = jwt.sign({ userName: oldUser.userName, id: oldUser._id }, process.env.secret, { expiresIn: '1d' })
+        const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, process.env.secret, { expiresIn: '1d' })
 
         res.status(200).json('user sin in seccessfuly')
     } catch (error) {
