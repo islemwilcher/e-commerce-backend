@@ -4,6 +4,18 @@ import jwt from "jsonwebtoken"
 
 import Product from '../moduls/product.js'
 
+// create product
+export const createProduct = async (req, res) => {
+    const newProduct = new Product(req.body)
+
+    try {
+        const savedProduct = await newProduct.save()
+        res.status(200).json(savedProduct)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 // all products
 export const getAllProducts = async (req, res) => {
     try {
