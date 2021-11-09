@@ -4,11 +4,13 @@ import express from 'express'
 const router = express.Router()
 
 import { getAllUsers, updated, deleted, getUser, getUserStatistic } from '../controllers/user.js'
+import verifyTokenAndAdmin from '../middleware/verifyTokenAndAdmin.js'
+import verifyTokenAndAuthorization from '../middleware/verifyTokenAndAuthorization.js'
 
-router.get('/', getAllUsers)
-router.put('/:id', updated)
-router.delete('/:id', deleted)
-router.get('/user/:id', getUser)
-router.get('/statistic', getUserStatistic)
+router.get('/', verifyTokenAndAdmin, getAllUsers)
+router.put('/:id', verifyTokenAndAuthorization, updated)
+router.delete('/:id', verifyTokenAndAuthorization, deleted)
+router.get('/user/:id', verifyTokenAndAdmin, getUser)
+router.get('/statistic', verifyTokenAndAdmin, getUserStatistic)
 
 export default router

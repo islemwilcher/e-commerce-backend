@@ -1,4 +1,7 @@
 
+import CryptoJs from "crypto-js"
+import jwt from "jsonwebtoken"
+
 import User from '../moduls/user.js'
 
 // all users
@@ -14,7 +17,23 @@ export const getAllUsers = async (req, res) => {
 
 //update
 export const updated = async (req, res) => {
+    if (req.body.password) {
+        req.body.password = CryptoJS.AES.encrypt(
+        req.body.password,
+        process.env.PASS_SEC
+        ).toString();
+    }
 
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true }
+        )
+        res.status(200).json(updatedUser)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
 
 //delete
@@ -32,7 +51,8 @@ export const getUser = async (req, res) => {
     const { id } = req.params;
     try {
         const user = await User.findById(id)
-        res.status(200).json(user)
+        const { password, ...others } = user._doc
+        res.status(200).json(others)
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
