@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 
 import AuthRouter from './routes/auth.js'
 import UserRouter from './routes/user.js'
+import ProductRouter from './routes/product.js'
 
 const app = express()
 dotenv.config()
@@ -18,6 +19,7 @@ app.use(cors())
 
 app.use('/auth', AuthRouter)
 app.use('/users', UserRouter)
+app.use('/products', ProductRouter)
 
 const PORT = process.env.PORT || 5000
 

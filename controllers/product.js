@@ -39,8 +39,7 @@ export const getAllProducts = async (req, res) => {
 }
 
 //update Product
-export const updateProduct = async (req, res) => {
-    
+export const updateProduct = async (req, res) => { 
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.is,
@@ -56,7 +55,6 @@ export const updateProduct = async (req, res) => {
 
 //delete Product
 export const deleteProduct = async (req, res) => {
-
     try {
         await Product.findByIdAndDelete(req.params.id)
         res.status(200).json('PRODUCT HAS BEEN DELETED')

@@ -3,9 +3,8 @@ import express from 'express'
 
 const router = express.Router()
 
-import { createProduct, updateProduct, deleteProduct,getAllProducts, getProduct } from '../controllers/user.js'
+import { createProduct, updateProduct, deleteProduct,getAllProducts, getProduct } from '../controllers/product.js'
 import verifyTokenAndAdmin from '../middleware/verifyTokenAndAdmin.js'
-import verifyTokenAndAuthorization from '../middleware/verifyTokenAndAuthorization.js'
 
 router.post('/', verifyTokenAndAdmin, createProduct)
 router.put('/:id', verifyTokenAndAdmin, updateProduct)
