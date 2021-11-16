@@ -1,5 +1,4 @@
 
-import { json } from 'body-parser'
 import Cart from '../moduls/cart.js'
 
 // create
@@ -22,7 +21,7 @@ export const updateCart = async (req, res) => {
             { $set: req.body },
             { new: true }
         )
-        res.status(200).json(updateCart)
+        res.status(200).json(updatedCart)
     } catch (error) {
         res.status(500).json(error)
     }

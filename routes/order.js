@@ -11,7 +11,7 @@ import verifyToken from '../middleware/verifyToken.js'
 router.post("/", verifyToken, createOrder)
 router.put("/:id", verifyTokenAndAdmin, updateOrder)
 router.delete("/:id", verifyTokenAndAdmin, deleteOrder)
-router.get("/find/userId", verifyTokenAndAuthorization, getUserOrder)
+router.get("/find/:userId", verifyTokenAndAuthorization, getUserOrder)
 router.get('/', verifyTokenAndAdmin, getAll)
 router.get("/income", verifyTokenAndAdmin, monthlyIncome)
 
