@@ -1,11 +1,11 @@
 
 import express from "express"
-const stripe = require('stripe')(process.env.STRIPE_KEY)
 
-import { payment } from "../controllers/stripe"
+
+import { payment } from "../controllers/stripe.js"
 
 const router = express.Router()
 
-router.post('/', payment)
+router.post('/payment', payment)
 
 export default router
