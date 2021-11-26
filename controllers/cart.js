@@ -17,7 +17,7 @@ export const createCart = async (req, res) => {
 export const updateCart = async (req, res) => {
     try {
         const updatedCart = await Cart.findByIdAndUpdate(
-            req.body.id,
+            req.params.id,
             { $set: req.body },
             { new: true }
         )
